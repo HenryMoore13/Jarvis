@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" context="IE=edge" />
+        <title>Jarvis</title>
+        <meta name="viewport" context="width=device-width, initial-scale=1" />
+        <style>
+            body {
+                background-color: rgb(140, 203, 255);
+            }
+            @media screen and (min-width: 800px) {
+                #searchBar {
+                    width: 55rem;
+                }
+                .articleContainer {
+                    display: grid;
+                }
+                .weatherImage {
+                    height: 14rem;
+                    position: relative;
+                    top: 15px;
+                }
+                .locationText {
+                    font-size: 40px;
+                    position: relative;
+                    left: 25px;
+                    top: 25px;
+                }
+                .tempText {
+                    font-size: 75px;
+                    position: relative;
+                    left: 25px;
+                    bottom: 25px;
+                }
+                .conditionText {
+                    font-size: 40px;
+                    font-weight: bold;
+                    position: relative;
+                    left: 25px;
+                    bottom: 70px;
+                }
+                .sideInfo {
+                    font-size: 32px;
+                    font-weight: bold;
+                    position: relative;
+                    top: 15px;
+                }
+            }
+            @media screen and (max-width: 1000px) {
+                #searchBar {
+                    width: 35rem;
+                }
+                .weatherImage {
+                    height: 8rem;
+                    position: relative;
+                    top: 15px;
+                }
+                .locationText {
+                    font-size: 30px;
+                    position: relative;
+                    left: 15px;
+                }
+                .tempText {
+                    font-size: 50px;
+                    position: relative;
+                    left: 15px;
+                    bottom: 35px;
+                }
+                .conditionText {
+                    font-size: 24px;
+                    font-weight: bold;
+                    position: relative;
+                    left: 15px;
+                    bottom: 70px;
+                }
+                .sideInfo {
+                    font-size: 21px;
+                    font-weight: bold;
+                }
+            }
+            .searchCard {
+                display: flex;
+                justify-content: center;
+                padding-top: 5px;
+                padding-bottom: 15px;
+            }
+            #searchBar {
+                height: 2rem;
+                padding-left: 5px;
+                border-style: none;
+                color: black;
+                background-color: rgba(255, 255, 255, 0.5);
+                border-radius: 5px;
+            }
+            .searchButton {
+                height: 2rem;
+                margin-left: 3px;
+                background-color: rgba(255, 255, 255, 0);
+                color: white;
+                font-size: 20px;
+                border-style: none;
+                border-radius: 5px;
+            }
+            .searchContainer {
+                display: flex;
+            }
+            .quoteContainer {
+                position: relative;
+                bottom: 25px;
+            }
+            .welcomeMessage {
+                text-align: center;
+                border-style: solid;
+                border-color: white;
+                font-family: "Lucida Sans", "Lucida Sans Regular",
+                    "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana,
+                    sans-serif;
+                font-size: 50px;
+                font-weight: bold;
+                color: white;
+                background-color: rgb(86, 96, 245);
+                padding: 10px;
+                margin-bottom: 10px;
+                border-radius: 10px;
+                text-shadow: 2px 2px rgb(0, 0, 0);
+            }
+            .statementText {
+                font-size: 20px;
+            }
+            .authorText {
+                font-size: 20px;
+            }
+            .weatherCard {
+                border-radius: 10px;
+                border-style: solid;
+                border-color: white;
+                background-color: rgb(50, 63, 245);
+                text-shadow: 3px 3px rgb(0, 0, 0);
+                color: white;
+                font-family: "Lucida Sans", "Lucida Sans Regular",
+                    "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana,
+                    sans-serif;
+                margin-bottom: 10px;
+            }
+            .cardBody {
+                display: flex;
+                justify-content: space-around;
+                padding-bottom: 30px;
+            }
+            .cardHeader {
+                display: flex;
+                justify-content: center;
+                font-size: 20px;
+            }
+            .mainInfo {
+                display: flex;
+                justify-content: space-between;
+            }
+            .articleContainer {
+                grid-template-columns: 1fr 1fr;
+                margin: 10px;
+            }
+            .newsCard {
+                border-radius: 10px;
+                border-style: solid;
+                border-color: white;
+                background-color: rgb(226, 39, 39);
+                text-shadow: 3px 3px rgb(0, 0, 0);
+                color: white;
+                font-family: "Lucida Sans", "Lucida Sans Regular",
+                    "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana,
+                    sans-serif;
+                margin-bottom: 10px;
+            }
+            .articleBody {
+                text-align: center;
+                padding-bottom: 15px;
+            }
+            .articleImage {
+                height: 18rem;
+                border-radius: 10px;
+            }
+            .articleLink {
+                text-decoration: none;
+                color: white;
+                font-weight: bold;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="searchCard">
+            <form action="https://www.google.com/search" target="_blank">
+                <div class="searchContainer input-group">
+                    <input
+                        id="searchBar"
+                        type="text"
+                        class="form-control"
+                        name="q"
+                        placeholder="Ask Jarvis"
+                    />
+                    <div class="btn-group">
+                        <input
+                            class="searchButton btn btn-default"
+                            value="Search"
+                            type="submit"
+                        />
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="welcomeMessage">
+            <p>Good Morning {{ context.userName }}</p>
+            <div class="quoteContainer">
+                <p class="statementText">{{ context.quote["statement"] }}</p>
+                <p class="authorText">- {{ context.quote["author"] }}</p>
+            </div>
+        </div>
+        <div class="weatherCard">
+            <div class="cardHeader"><h1>Today's Weather</h1></div>
+            <div class="cardBody">
+                <div class="mainInfo">
+                    <img
+                        class="weatherImage"
+                        src="{{context.weather_image_URL}}"
+                    />
+                    <div>
+                        <h1 class="locationText">
+                            {{ context.city }}, {{ context.state }}
+                        </h1>
+                        <h1 class="tempText">{{ context.temp }}°F</h1>
+                        <p class="conditionText">
+                            {{ context.weather["description"] }}
+                        </p>
+                    </div>
+                </div>
+                <div class="sideInfo">
+                    <p>
+                        Hi: {{ context.temp_max }}° Lo: {{ context.temp_min }}°
+                    </p>
+                    <p>Wind: {{ context.weather["wind"] }}mph</p>
+                    <p>Humidity: {{ context.weather["humidity"] }}%</p>
+                </div>
+            </div>
+        </div>
+        <div class="newsCard">
+            <div class="cardHeader"><h1>Breaking News Stories</h1></div>
+            <div class="articleContainer">
+                <div>
+                    <div class="articleBody">
+                        <img
+                            class="articleImage"
+                            src="{{context.articles[0]['image_URL']}}"
+                        />
+                        <div class="storyInfo">
+                            <h2>{{ context.articles[0]["headline"] }}</h2>
+                            <a
+                                class="articleLink"
+                                target="_blank"
+                                href="{{context.articles[0]['link']}}"
+                                ><h3>>>> Read More Here <<<</h3></a
+                            >
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="articleBody">
+                        <img
+                            class="articleImage"
+                            src="{{context.articles[1]['image_URL']}}"
+                        />
+                        <div class="storyInfo">
+                            <h2>{{ context.articles[1]["headline"] }}</h2>
+                            <a
+                                class="articleLink"
+                                target="_blank"
+                                href="{{context.articles[1]['link']}}"
+                                ><h3>>>> Read More Here <<<</h3></a
+                            >
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="articleBody">
+                        <img
+                            class="articleImage"
+                            src="{{context.articles[2]['image_URL']}}"
+                        />
+                        <div class="storyInfo">
+                            <h2>{{ context.articles[2]["headline"] }}</h2>
+                            <a
+                                class="articleLink"
+                                target="_blank"
+                                href="{{context.articles[2]['link']}}"
+                                ><h3>>>> Read More Here <<<</h3></a
+                            >
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="articleBody">
+                        <img
+                            class="articleImage"
+                            src="{{context.articles[3]['image_URL']}}"
+                        />
+                        <div class="storyInfo">
+                            <h2>{{ context.articles[3]["headline"] }}</h2>
+                            <a
+                                class="articleLink"
+                                target="_blank"
+                                href="{{context.articles[3]['link']}}"
+                                ><h3>>>> Read More Here <<<</h3></a
+                            >
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
